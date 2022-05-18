@@ -1,7 +1,9 @@
+import uuid
+
 from neo4j import GraphDatabase
 
 from app.core.config import settings
-from app.utils.converter import modelConverter
+from app.utils.converter import ModelConverter
 
 
 class Base:
@@ -19,9 +21,10 @@ class Base:
                 for record in result.data()]
 
     def create(self, db: GraphDatabase, data: object) -> list:
+        data[] = str(uuid.uuid4().hex)
         query = f"""
                 CREATE ({settings.RECORD_NODE_NAME}:{settings.RECORD_NODE_LABEL}
-                        {modelConverter.to_cypher_object(data)})
+                        {ModelConverter.to_cypher_object(data)})
                 RETURN {settings.RECORD_NODE_NAME}
                 """
         result = db.run(query)
