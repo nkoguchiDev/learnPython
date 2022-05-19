@@ -1,7 +1,7 @@
 import pytest
 from pydantic import BaseModel
 
-from app.utils.converter import ModelConverter
+from app.libs.converter import ModelConverter
 
 testdata = [[{"name": 'name0'},
              '{name: "name0",description: "-"}'],
