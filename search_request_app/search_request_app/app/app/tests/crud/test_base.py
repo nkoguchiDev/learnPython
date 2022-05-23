@@ -25,29 +25,32 @@ _user = {
     "tax": 'tax3'
 }
 
+node_name = "node"
+node_label = "label"
+
 
 class TestCRUDBase:
 
     def test_create(self, db):
-        result = crud.base.create(db, User(**_user))
+        result = crud.base.create(db, node_name, node_label, User(**_user))
         assert result[0]['name'] == _user['name']
 
     def test_get(self, db):
-        result = crud.base.get(db, id=_user["id"])
+        result = crud.base.get(db, node_name, node_label, id=_user["id"])
 
         assert len(result) == 1
         assert result[0]['email'] == _user['email']
 
     def test_update(self, db):
         update_email = random_str(7) + '@gmail.com'
-        result = crud.base.update(db, id=_user["id"], data=User(
+        result = crud.base.update(db, node_name, node_label, id=_user["id"], data=User(
             **{"id": _user["id"], "email": update_email}))
 
         assert len(result) == 1
         assert result[0]['email'] == update_email
 
     def test_delete(self, db):
-        crud.base.delete(db, id=_user["id"])
-        result = crud.base.get(db, id=_user["id"])
+        crud.base.delete(db, node_name, node_label, id=_user["id"])
+        result = crud.base.get(db, node_name, node_label, id=_user["id"])
 
         assert len(result) == 0
