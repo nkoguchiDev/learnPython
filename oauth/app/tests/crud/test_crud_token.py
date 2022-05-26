@@ -3,28 +3,23 @@ import uuid
 
 from app import crud
 
+token = uuid.uuid4().hex
 
 data = {
-    "id": uuid.uuid4().hex,
-    "key": uuid.uuid4().hex,
-    "secret": uuid.uuid4().hex,
+    "developerId": uuid.uuid4().hex,
 }
 
 
 class TestCRUDClientCredential:
 
-    def test_create(self, cache):
-        result = crud.token.create(cache, data)
-        assert result['key'] == data['key']
-        assert result['secret'] == data['secret']
+    def test_create(self, redis_cache):
+        assert crud.token.create(redis_cache, token, data)
 
-    def test_get(self, cache):
-        result = crud.token.get(cache, id=data["id"])
+    def test_get(self, redis_cache):
+        result = crud.token.get(redis_cache, token)
 
-        assert len(result) == 0
+        assert result["developerId"] == data["developerId"]
 
-    def test_delete(self, cache):
-        crud.token.delete(cache, id=data["id"])
-        result = crud.token.get(cache, id=data["id"])
+    def test_delete(self, redis_cache):
 
-        assert len(result) == 0
+        assert crud.token.delete(redis_cache, token)

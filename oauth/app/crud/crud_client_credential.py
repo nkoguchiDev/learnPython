@@ -11,14 +11,14 @@ class CRUDClientCredential(Base):
     def __init__(self):
         pass
 
-#     def get(self, db: GraphDatabase, id: str) -> list:
-#         query = f"""
-#             MATCH ({settings.TOKEN_NODE_NAME}:{settings.TOKEN_NODE_LABEL} {{id: '{id}'}})
-#             RETURN {settings.TOKEN_NODE_NAME}
-#         """
-#         result = db.run(query)
-#         return [record.get(settings.TOKEN_NODE_NAME)
-#                 for record in result.data()]
+    def get(self, db: GraphDatabase, id: str) -> list:
+        query = f"""
+            MATCH ({settings.TOKEN_NODE_NAME}:{settings.TOKEN_NODE_LABEL} {{id: '{id}'}})
+            RETURN {settings.TOKEN_NODE_NAME}
+        """
+        result = db.run(query)
+        return [record.get(settings.TOKEN_NODE_NAME)
+                for record in result.data()]
 
     def create(
             self,

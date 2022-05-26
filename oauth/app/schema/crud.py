@@ -2,20 +2,21 @@ from pydantic import BaseModel
 
 
 class User(BaseModel):
-    id: str = None
-    email: str = None
-    password: str = None
+    id: str
+    email: str
+    password: str
+    is_active = True
+    is_super = False
 
 
 class ClientCredential(BaseModel):
-    id: str = None
-    key: str = None
-    secret: str = None
+    id: str
+    key: str
+    secret: str
 
 
 class Token(BaseModel):
-    id: str = None
-    access_token: str = None
+    developerId: str
     # refresh_token: str = None
     # expires_in: int = None
     # scope: str = None
