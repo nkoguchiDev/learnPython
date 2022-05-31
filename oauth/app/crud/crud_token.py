@@ -1,7 +1,7 @@
 import redis
 
 from app.core.config import settings
-from app.schema.crud import Token
+from app.models.crud import Token
 from app.libs.converter import ModelConverter
 
 

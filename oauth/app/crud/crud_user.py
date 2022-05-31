@@ -3,7 +3,7 @@ from neo4j import GraphDatabase
 from app.core.config import settings
 from app.crud.base import Base
 from app.libs.converter import ModelConverter
-from app.schema.crud import User
+from app.models.crud import User
 
 
 class CRUDUser(Base):

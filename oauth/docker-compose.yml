@@ -1,5 +1,15 @@
 version: "3"
 services:
+  api:
+    container_name: FastAPI
+    build: .
+    ports:
+      - "80:80"
+    environment:
+        - GRAPH_DB_HOST=neo4j
+        - GRAPH_DB_PORT=7687
+        - GRAPH_DB_USER=neo4j
+        - GRAPH_DB_PASSWORD=neo4jj
 
   neo4j:
     container_name: neo4j
