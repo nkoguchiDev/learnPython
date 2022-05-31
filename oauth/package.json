@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "newman run newman/Collection.json"
+    "test": "newman run newman/collection.json"
   },
   "author": "",
   "license": "ISC",
