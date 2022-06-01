@@ -1,7 +1,7 @@
 import redis
 
 from app.core.config import settings
-from app.models.crud import Token
+from app import models
 from app.libs.converter import ModelConverter
 
 
@@ -14,7 +14,7 @@ class CRUDToken:
             cache: redis,
             key: str,
             data: dict) -> list:
-        return cache.hset(key, mapping=Token(**data).dict(exclude_none=True))
+        return cache.hset(key, mapping=models.OauthToken(**data).dict(exclude_none=True))
 
     def get(
             self,

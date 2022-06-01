@@ -6,11 +6,15 @@ class Settings(BaseSettings):
     PROJECT_NAME: str = "IAM"
     API_V1_STR: str = "/api/v1"
 
+    SECRET_KEY: str
+    # 60 minutes * 24 hours * 8 days = 8 days
+    ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24 * 8
+
     # neo4j server settings
-    GRAPH_DB_USER: str = "neo4j"
-    GRAPH_DB_PASSWORD: str = "neo4jj"
-    GRAPH_DB_HOST: str = "localhost"
-    GRAPH_DB_PORT: int = 7687
+    GRAPH_DB_USER: str
+    GRAPH_DB_PASSWORD: str
+    GRAPH_DB_HOST: str
+    GRAPH_DB_PORT: int
 
     # cypher query settings
     USER_NODE_NAME: str = "user"
@@ -22,6 +26,9 @@ class Settings(BaseSettings):
     REDIS_HOST: str = "localhost"
     REDIS_PORT: int = 6379
     REDIS_DB_NUM: int = 0
+
+    class Config:
+        env_file = 'local.env'
 
 
 settings = Settings()

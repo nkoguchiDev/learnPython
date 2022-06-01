@@ -5,9 +5,15 @@ name = "pypi"
 
 [packages]
 neo4j = "*"
-pydantic = "*"
+pydantic = {extras = ["dotenv"], version = "*"}
 pytest = "*"
 redis = "*"
+fastapi = "*"
+uvicorn = "*"
+passlib = {extras = ["bcrypt"], version = "*"}
+python-jose = {extras = ["cryptography"], version = "*"}
+python-multipart = "*"
+pytest-cov = "*"
 
 [dev-packages]
 

@@ -3,7 +3,7 @@ from neo4j import GraphDatabase
 from app.core.config import settings
 from app.crud.base import Base
 from app.libs.converter import ModelConverter
-from app.models.crud import ClientCredential
+from app import models
 
 
 class CRUDClientCredential(Base):
@@ -26,7 +26,7 @@ class CRUDClientCredential(Base):
             data: dict) -> list:
         query = f"""
                 CREATE ({settings.TOKEN_NODE_NAME}:{settings.TOKEN_NODE_LABEL}
-                        {ModelConverter.to_cypher_object(ClientCredential(**data))})
+                        {ModelConverter.to_cypher_object(models.ClientCredential(**data))})
                 RETURN {settings.TOKEN_NODE_NAME}
                 """
         result = db.run(query)
