@@ -15,8 +15,6 @@ def create_super_user(
     user: schemas.User,
     db: GraphDatabase = Depends(
         deps.get_db)):
-    user = user.dict()
-    user["id"] = uuid.uuid4().hex
-    result = crud.user.create(db, user)[0]
+    result = crud.user.create(db, email=user.email, password=user.password)
     result["password"] = "******"
     return result
