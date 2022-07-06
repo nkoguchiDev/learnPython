@@ -1,14 +1,14 @@
 from beanie import init_beanie
 from fastapi import Depends, FastAPI
 
-from app.core.db import User, db
+from app.core.db import User, AccessToken, db
 from app.core.schemas import UserCreate, UserRead, UserUpdate
 from app.core.users import auth_backend, current_active_user, fastapi_users
 
 app = FastAPI()
 
 app.include_router(fastapi_users.get_auth_router(
-    auth_backend), prefix="/auth/jwt", tags=["auth"])
+    auth_backend), prefix="/auth/cookie", tags=["auth"])
 app.include_router(
     fastapi_users.get_register_router(UserRead, UserCreate),
     prefix="/auth",
@@ -42,5 +42,6 @@ async def on_startup():
         database=db,
         document_models=[
             User,
+            AccessToken,
         ],
     )
