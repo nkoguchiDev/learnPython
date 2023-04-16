@@ -40,3 +40,9 @@ python manage.py runserver
 ```sh
 python manage.py test polls
 ```
+
+### 新しいアプリの作成
+
+```sh
+python manage.py startapp app_name
+```
