@@ -1,8 +1,8 @@
 from uuid import uuid4
 from enum import Enum, auto
 from typing import Optional
-from pydantic import BaseModel
-from datetime import datetime
+from pydantic import BaseModel, Field
+from datetime import date
 
 from app.domain.models.user import User
 
@@ -20,11 +20,11 @@ class TaskStatus(Enum):
 
 
 class Task(BaseModel):
-    id: str
+    id: str = Field(frozen=True)
     userId: str
     title: str
     description: str
-    targetDate: datetime
+    target_date: date
     priority: TaskPriority
     status: TaskStatus
 
@@ -34,6 +34,15 @@ class Task(BaseModel):
     def update_status(self, status: TaskStatus) -> None:
         self.status = status
 
+    def update_target_date(self, target_date: date) -> None:
+        self.target_date = target_date
+
+    def update_description(self, description: str) -> None:
+        self.description = description
+
+    def update_priority(self, priority: TaskPriority) -> None:
+        self.priority = priority
+
 
 class TaskFactory:
     @classmethod
@@ -42,7 +51,7 @@ class TaskFactory:
         user: User,
         title: str,
         description: str,
-        targetDate: datetime,
+        target_date: date,
         priority: TaskPriority,
         status: TaskStatus,
     ):
@@ -52,7 +61,7 @@ class TaskFactory:
             userId=user.id,
             title=title,
             description=description,
-            targetDate=targetDate,
+            target_date=target_date,
             priority=priority,
             status=status,
         )

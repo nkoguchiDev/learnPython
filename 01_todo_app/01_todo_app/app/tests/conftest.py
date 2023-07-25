@@ -18,7 +18,7 @@ def task() -> Task:
             user=user,
             title="title",
             description="hi",
-            targetDate=datetime.now(),
+            target_date=datetime.now(),
             priority=TaskPriority.Middle,
             status=TaskStatus.Todo,
         )
