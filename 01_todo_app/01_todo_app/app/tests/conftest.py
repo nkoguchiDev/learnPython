@@ -2,6 +2,7 @@ import pytest
 
 from datetime import datetime
 
+from app.infrastructure.database.connection import db
 from app.domain.models.user import User, UserFactory
 from app.domain.models.task import Task, TaskFactory, TaskPriority, TaskStatus
 
@@ -24,3 +25,9 @@ def task() -> Task:
         )
 
     return excute
+
+
+@pytest.fixture(scope="class", autouse=True)
+def scope_class():
+    yield
+    db.command("dropDatabase")

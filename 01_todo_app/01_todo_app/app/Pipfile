@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 pydantic = {extras = ["email"], version = "*"}
 passlib = {extras = ["bcrypt"], version = "*"}
+pymongo = "*"
+pydantic-settings = "*"
 
 [dev-packages]
 pytest = "*"
