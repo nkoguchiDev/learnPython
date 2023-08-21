@@ -1,7 +1,6 @@
 from datetime import date, timedelta
 
-from app.domain.models.task import TaskFactory, TaskPriority, TaskStatus
-from app.domain.events.task import TaskDeletedEvent
+from app.domain.models.tasks import TaskFactory, TaskPriority, TaskStatus
 
 
 class タスクを作成する場合:
@@ -89,19 +88,3 @@ class タスク情報を変更する場合:
         sut.update_priority(priority=updated_priority)
 
         assert sut.priority == updated_priority
-
-
-class タスクを削除する場合:
-    def タスク削除イベントが発行されること(self, user):
-        sut = TaskFactory.create(
-            user=user,
-            title="title",
-            description="hi",
-            target_date=date.today(),
-            priority=TaskPriority.Middle,
-            status=TaskStatus.Todo,
-        )
-
-        sut.delete(user=user)
-
-        assert TaskDeletedEvent(userId=user.id, taskId=sut.id) in sut.get_events()

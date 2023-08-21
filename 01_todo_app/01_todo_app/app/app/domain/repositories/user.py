@@ -1,11 +1,7 @@
-from app.domain.models.user import User
-from app.infrastructure.database.connection import db
+from app.domain.models.users import User
 
 
-class UserRepository:
-    def __init__(self) -> None:
-        self._database = db.users
-
+class IUserRepository:
     def get_by_email(self, email: str) -> User | None:
         user_data = self._database.find_one({"email": email})
         if user_data is None:

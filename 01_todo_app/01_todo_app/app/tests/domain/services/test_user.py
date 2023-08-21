@@ -1,4 +1,4 @@
-from app.domain.models.user import User, UserFactory
+from app.domain.models.users import User, UserFactory
 from app.domain.services.user import UserService
 from app.domain.repositories.user import UserRepository
 
