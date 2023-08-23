@@ -12,6 +12,7 @@ mongoengine = "*"
 [dev-packages]
 pytest = "*"
 mypy = "*"
+bandit = "*"
 
 [requires]
 python_version = "3.11"
