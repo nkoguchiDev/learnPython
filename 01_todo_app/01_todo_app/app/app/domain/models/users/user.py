@@ -7,12 +7,12 @@ from app.core.security import Password
 
 class User(BaseModel):
     id: str = Field(frozen=True)
+    name: str
     email: EmailStr
-    hashed_password: str
-    is_active: bool
+    password_hash: str
 
     def verify_password(self, password) -> bool:
-        return Password.verify_password(password, self.hashed_password)
+        return Password.verify_password(password, self.password_hash)
 
     def update_password(self, password) -> None:
-        self.hashed_password = Password.to_hashed_password(password)
+        self.password_hash = Password.to_hashed_password(password)

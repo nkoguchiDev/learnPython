@@ -8,7 +8,7 @@ DomainModelType = TypeVar("DomainModelType", bound=BaseModel)
 
 class IRepository(ABC, Generic[DomainModelType]):
     @abstractmethod
-    def get(self, id: str) -> DomainModelType:
+    def get(self, id: str) -> DomainModelType | None:
         raise NotImplementedError()
 
     @abstractmethod
@@ -16,5 +16,5 @@ class IRepository(ABC, Generic[DomainModelType]):
         raise NotImplementedError()
 
     @abstractmethod
-    def delete(self, id: str) -> DomainModelType:
+    def delete(self, id: str) -> None:
         raise NotImplementedError()

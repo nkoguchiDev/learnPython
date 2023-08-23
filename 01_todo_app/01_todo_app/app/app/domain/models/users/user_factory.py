@@ -6,10 +6,10 @@ from app.core.security import Password
 
 class UserFactory:
     @classmethod
-    def create(cls, email: str, password: str) -> User:
+    def create(cls, email: str, name: str, password: str) -> User:
         return User(
             id=str(uuid4()),
             email=email,
-            hashed_password=Password.to_hashed_password(password),
-            is_active=True,
+            name=name,
+            password_hash=Password.to_hashed_password(password),
         )

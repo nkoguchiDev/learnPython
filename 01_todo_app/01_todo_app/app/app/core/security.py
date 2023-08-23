@@ -9,5 +9,5 @@ class Password:
         return cls.pwd_context.hash(password)
 
     @classmethod
-    def verify_password(cls, password, hashed_password: str) -> bool:
-        return cls.pwd_context.verify(password, hashed_password)
+    def verify_password(cls, password, password_hash: str) -> bool:
+        return cls.pwd_context.verify(password, password_hash)
