@@ -1,7 +1,8 @@
 import pytest
-
+from mongoengine import connect, disconnect
 from datetime import datetime
 
+from app.core.config import settings
 from app.domain.models.users import User, UserFactory
 from app.domain.models.tasks import Task, TaskFactory, TaskPriority, TaskStatus
 
@@ -35,6 +36,15 @@ def task() -> Task:
 
 
 @pytest.fixture(scope="class", autouse=True)
-def scope_class():
+def mongodb_connect():
+    connect(
+        host=settings.DB_HOST,
+        port=settings.DB_PORT,
+        username=settings.DB_USER,
+        password=settings.DB_PASSWORD,
+        uuidRepresentation="standard",
+        alias=settings.PROJECT_NAME,
+    )
     yield
     UserDB().drop_collection()
+    disconnect(alias=settings.PROJECT_NAME)

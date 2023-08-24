@@ -8,4 +8,4 @@ class UserService:
         self._user_repos: IUserRepository = MongoUserRepository()
 
     def is_exist(self, user: User) -> bool:
-        return self._user_repos.get(id=user.id) is not None
+        return self._user_repos.get_by_email(email=user.email) is not None
